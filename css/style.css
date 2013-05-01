@@ -1,0 +1,94 @@
+root { 
+    display: block;
+}
+
+html, body {
+    background: url("../img/bg.jpg") repeat-x scroll 0 0 #EAEAEA;
+    font-family: tahoma,sans,arial;
+    font-size: 12px;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor-principal{
+    background: none repeat scroll 0 0 #FFFFFF;
+    border: 1px solid #C7C7C7;
+    border-radius: 4px 4px 4px 4px;
+    box-shadow: 0 0 5px #BBBBBB;
+    margin: 10px;
+    min-height: 300px;
+    padding:0px;
+}
+
+.contenido-principal{
+    padding:10px;
+}
+
+.banner{
+    background: #F1F1F1;
+    border-bottom: 1px solid #D7D7D7;
+    color:#666666;
+}
+
+.banner ul{
+    height:45px;
+    list-style:none;
+    margin:0px;
+    padding:0px;
+}
+
+.banner li{
+    float: left;
+    margin:10px;
+    padding:4px;
+    font-size:14px;
+    border:0px solid red;
+}
+
+.banner .logo{
+    margin:4px 5px 4px 15px;
+    padding:0px;
+}
+
+
+.banner .title{
+    margin-left:0px;
+}
+
+.banner .user{
+    float: right;
+}
+
+.titlebar{
+    border-bottom:1px solid #c7c7c7;
+    padding:10px 10px 14px 10px;
+    color:#666666;
+    background:#fafafa;
+    border-radius:4px 4px 0px 0px;
+}
+
+.titlebar ul{
+    padding:0px;
+    margin:0px;
+    list-style:none;
+    height:20px;
+}
+
+.titlebar .title{
+    float:left;
+    line-height: 24px;
+    font-size: 18px;
+}
+
+.titlebar .search{
+    float:right;
+    line-height: 24px;
+}
+
+.text-center{
+    text-align: center;
+}
+
+
+
+
