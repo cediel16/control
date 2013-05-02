@@ -8,7 +8,7 @@ $(document).ready(function(e) {
             success: function(data) {
                 if (data.resp === 1) {
                     flash_type = 'info';
-                    $("#unidad").val('');
+                    $("#cargo").val('');
                     $("#lista").html(data.lista);
                 } else if (data.resp === 2) {
                     flash_type = 'block';

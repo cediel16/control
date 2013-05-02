@@ -1,7 +1,9 @@
 <?php
 require_once '../config.php';
 
-$data = unidades::obtener_fila(var_get('var'));
+$data = rutas::obtener_fila(var_get('var'));
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -18,17 +20,21 @@ $data = unidades::obtener_fila(var_get('var'));
             <div class="titlebar">
                 <ul>
                     <li class="title">
-                        Editar unidad
+                        Editar ruta del documento
+                    </li>
+                    <li class="search">
+                        <a href="<?php echo site_url() ?>/estaciones/?var=<?php echo $data['id'] ?>" class="btn"><i class="icon-edit"></i> Editar estaciones</a>
                     </li>
                 </ul>
             </div>
             <div class="contenido-principal">
                 <div id="flashdata"></div>
-                <form id="form_edit" action="ajax.php" class="form-inline" method="post">
+                <form id="form_edit" action="ajax.php" class="form-vertical" method="post">
                     <div class="control-group">
                         <div class="controls">
                             <input type="hidden" id="id" name="id" value="<?php echo $data['id'] ?>">
-                            <input type="text" class="span5" id="unidad" name="unidad" value="<?php echo $data['unidad'] ?>" />
+                            <label><strong>Nombre de la ruta</strong></label>
+                            <input type="text" class="span5" id="ruta" name="ruta" value="<?php echo $data['ruta'] ?>" />
                             <span class="cargando"><img src="../img/cargando.gif" /></span>
                         </div>
                     </div>

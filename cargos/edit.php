@@ -1,7 +1,9 @@
 <?php
 require_once '../config.php';
 
-$data = unidades::obtener_fila(var_get('var'));
+$data = cargos::obtener_fila(var_get('var'));
+
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -28,7 +30,7 @@ $data = unidades::obtener_fila(var_get('var'));
                     <div class="control-group">
                         <div class="controls">
                             <input type="hidden" id="id" name="id" value="<?php echo $data['id'] ?>">
-                            <input type="text" class="span5" id="unidad" name="unidad" value="<?php echo $data['unidad'] ?>" />
+                            <input type="text" class="span5" id="cargo" name="cargo" value="<?php echo $data['cargo'] ?>" />
                             <span class="cargando"><img src="../img/cargando.gif" /></span>
                         </div>
                     </div>

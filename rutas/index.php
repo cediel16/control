@@ -16,29 +16,23 @@ require_once '../config.php';
             <div class="titlebar">
                 <ul>
                     <li class="title">
-                        Unidades
+                        Rutas de documentos
                     </li>
                     <li class="search">
-                        <!--
-                        <div class="input-append">
-                            <input class="span2" id="appendedInputButton" type="text">
-                            <button class="btn" type="button">Buscar</button>
-                        </div>
-                        -->
                     </li>
                 </ul>
             </div>
             <div class="contenido-principal">
                 <div id="flashdata"></div>
                 <form id="form_add" action="ajax.php" class="form-inline" method="post">
-                    <input type="text" class="span4" placeholder="Añadir unidad" name="unidad" id="unidad">
+                    <input type="text" class="span4" placeholder="Añadir ruta de documento" name="ruta" id="ruta">
                 </form>
                 <div id="lista" class="tabbable basic-grid">
-                    <?php echo unidades::lista() ?>
+                    <?php echo rutas::lista() ?>
                 </div>
             </div>
         </section>
         <?php include_once '../tpl/script.php'; ?>
-        <script src="<?php echo site_url() ?>/js/unidades.js"></script>
+        <script src="<?php echo site_url() ?>/js/rutas.js"></script>
     </body>
 </html>

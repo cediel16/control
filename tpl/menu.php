@@ -22,9 +22,10 @@
                         <a data-toggle="dropdown" class="dropdown-toggle" href="#">Definiciones <b class="caret"></b></a>
                         <ul class="dropdown-menu">
                             <li><a href="<?php echo site_url() ?>/unidades">Unidades</a></li>
-                            <li><a href="#">Cargos</a></li>
+                            <li><a href="<?php echo site_url() ?>/cargos">Cargos</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">Ruta de documentos</a></li>
+                            <li><a href="<?php echo site_url() ?>/rutas">Rutas de documentos</a></li>
+                            <li><a href="<?php echo site_url() ?>/estaciones">Estaciones</a></li>
                         </ul>
                     </li>
                 </ul>

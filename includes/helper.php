@@ -1,9 +1,5 @@
 <?php
 
-function redirect($url) {
-    header('location:' . $url);
-}
-
 function site_url() {
     return 'http://' . $_SERVER['SERVER_NAME'] . '/control';
 }
@@ -12,22 +8,33 @@ function base_url() {
     return '/var/www/control';
 }
 
+function redirect($url) {
+    header('location:' . site_url() . '/' . $url);
+}
+
 function var_post($arg = '') {
+    $post = Array();
+    foreach ($_POST as $k => $v) {
+        $post[$k] = trim($v, ' ');
+    }
     if ($arg == '') {
-        return $_POST;
+        return $post;
     } else {
-        return $_POST[$arg];
+        return $post[$arg];
     }
 }
 
 function var_get($arg = '') {
+    $get = Array();
+    foreach ($_GET as $k => $v) {
+        $get[$k] = trim($v, ' ');
+    }
     if ($arg == '') {
-        return $_GET;
+        return $get;
     } else {
-        return $_GET[$arg];
+        return $get[$arg];
     }
 }
-
 
 function set_flashdata($item, $msg) {
     $_SESSION['flashdata'] = array('item' => $item, 'msg' => $msg);

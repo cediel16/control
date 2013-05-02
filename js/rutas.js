@@ -8,7 +8,7 @@ $(document).ready(function(e) {
             success: function(data) {
                 if (data.resp === 1) {
                     flash_type = 'info';
-                    $("#unidad").val('');
+                    $("#ruta").val('');
                     $("#lista").html(data.lista);
                 } else if (data.resp === 2) {
                     flash_type = 'block';
@@ -47,7 +47,7 @@ $(document).ready(function(e) {
             }
         });
         $(".cargando").css('display', 'none');
-        $("#unidad").removeAttr("readonly");
+        $("#ruta").removeAttr("readonly");
         $("#btn_volver").removeAttr("disabled");
         $("#btn_editar").removeAttr("disabled"  );
         return false;

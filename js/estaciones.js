@@ -8,7 +8,7 @@ $(document).ready(function(e) {
             success: function(data) {
                 if (data.resp === 1) {
                     flash_type = 'info';
-                    $("#unidad").val('');
+                    $("#ruta").val('');
                     $("#lista").html(data.lista);
                 } else if (data.resp === 2) {
                     flash_type = 'block';
@@ -47,9 +47,9 @@ $(document).ready(function(e) {
             }
         });
         $(".cargando").css('display', 'none');
-        $("#unidad").removeAttr("readonly");
+        $("#ruta").removeAttr("readonly");
         $("#btn_volver").removeAttr("disabled");
-        $("#btn_editar").removeAttr("disabled"  );
+        $("#btn_editar").removeAttr("disabled");
         return false;
     });
 
@@ -57,5 +57,25 @@ $(document).ready(function(e) {
         window.location = '.';
     });
 
-
+    $("#ruta").change(function() {
+        cargando_lista("#lista");
+        $.ajax({
+            type: "POST",
+            url: 'ajax.php',
+            dataType: 'json',
+            data: '&band=lista',
+            success: function(data) {
+                if (data.resp === 1) {
+                    $("#lista").html(data.lista);
+                } else {
+                    $("#lista").html('');
+                }
+            },
+            error: function(xhr, textStatus, errorThrown) {
+                $("#lista").html('');
+                flashdata('error', textStatus.toUpperCase() + ' ' + xhr.status + ' - ' + errorThrown);
+                alert(textStatus.toUpperCase() + ' ' + xhr.status + ' - ' + errorThrown);
+            }
+        });
+    });
 });
