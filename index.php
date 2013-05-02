@@ -1,5 +1,7 @@
 <?php
 require_once 'config.php';
+
+sesiones::logged_in();
 ?>
 <!DOCTYPE html>
 <html>
@@ -10,7 +12,7 @@ require_once 'config.php';
     </head>
     <body>
         <header>
-            <?php include_once 'tpl/menu.php'; ?>
+            <?php include_once 'tpl/header.php'; ?>
         </header>
         <section class="container-fluid contenedor-principal">
         </section>

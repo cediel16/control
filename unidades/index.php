@@ -12,7 +12,7 @@ $lista = unidades::lista();
     </head>
     <body>
         <header>
-            <?php include_once '../tpl/menu.php'; ?>
+            <?php include_once '../tpl/header.php'; ?>
         </header>
         <section class="container-fluid contenedor-principal">
             <div class="titlebar">
@@ -35,7 +35,6 @@ $lista = unidades::lista();
                 <?php echo flashdata() ?>
                 <form action="add.php" class="form-inline" method="post">
                     <input type="text" class="span4" placeholder="Nueva unidad" name="unidad" id="unidad">
-                    <button type="submit" class="btn">Añadir</button>
                 </form>
                 <div style="margin-bottom: 18px;" class="tabbable">
                     <table class="table table-bordered table-hover">

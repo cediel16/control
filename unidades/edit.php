@@ -2,7 +2,7 @@
 require_once '../config.php';
 
 $data = unidades::obtener_fila(var_get('var'));
-print_r($data);
+//print_r($data);
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,9 +13,10 @@ print_r($data);
     </head>
     <body>
         <header>
-            <?php include_once '../tpl/menu.php'; ?>
+            <?php include_once '../tpl/header.php'; ?>
         </header>
         <section class="container-fluid contenedor-principal">
+            <!--
             <div class="titlebar">
                 <ul>
                     <li class="add">
@@ -26,14 +27,27 @@ print_r($data);
                     </li>
                 </ul>
             </div>
+            -->
+            <!--
             <div class="contenido-principal">
                 <?php echo flashdata() ?>
                 <form action="add.php" class="form-inline" method="post">
-                    <input type="hidden" name="unidad_id" id="unidad_id" value="<?php echo $data['id'] ?>">
-                    <input type="text" class="span4" name="unidad" id="unidad" value="<?php echo $data['unidad'] ?>">
-                    <button type="submit" class="btn">Editar</button>
+                    <div class="control-group">
+                        <div class="controls">
+                            <input type="hidden" name="unidad_id" id="unidad_id" value="<?php echo $data['id'] ?>">
+                            <input type="text" class="span5" name="unidad" id="unidad" value="<?php echo $data['unidad'] ?>">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <a class="btn">Cancelar</a>
+                            <button type="submit" class="btn">Editar</button>
+                        </div>
+                    </div>
                 </form>
             </div>
+            
+            -->
         </section>
         <?php include_once '../tpl/script.php'; ?>
         <script src="<?php echo site_url() ?>/js/unidades.js"></script>

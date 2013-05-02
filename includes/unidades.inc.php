@@ -2,7 +2,7 @@
 
 class unidades {
 
-    public function add($data) {
+    public static function add($data) {
         $db = new base();
         $r = $db->db_insert('unidades', $data);
         if ($r) {
@@ -12,7 +12,7 @@ class unidades {
         }
     }
 
-    public function lista() {
+    public static function lista() {
         $db = new base();
         $db->db_query("
             select *
@@ -23,7 +23,7 @@ class unidades {
         return $db->data;
     }
 
-    public function obtener_fila($id) {
+    public static function obtener_fila($id) {
         $db = new base();
         $db->db_query("
             select *
@@ -33,7 +33,7 @@ class unidades {
         return $db->data[0];
     }
 
-    public function login($user, $pass) {
+    public static function login($user, $pass) {
         $db = new base();
         $qry = "select id,
         usuario,
@@ -56,11 +56,11 @@ class unidades {
         }
     }
 
-    public function set_userdata($arg) {
+    public static function set_userdata($arg) {
         $_SESSION['userdata'] = $arg;
     }
 
-    public function userdata($arg = '') {
+    public static function userdata($arg = '') {
         if ($arg == '') {
             return $_SESSION['userdata'];
         } else {
@@ -68,13 +68,13 @@ class unidades {
         }
     }
 
-    public function logged_in() {
+    public static function logged_in() {
         if (sesiones::userdata('status') != 'activo') {
             redirect('sesiones/');
         }
     }
 
-    public function logout() {
+    public static function logout() {
         session_destroy();
         redirect('.');
     }

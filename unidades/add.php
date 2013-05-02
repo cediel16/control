@@ -4,7 +4,7 @@ require_once '../config.php';
 
 //sesiones::logged_in();
 
-if (unidades::add(array('unidad' => get_post('unidad')))) {
+if (unidades::add(array('unidad' => var_post('unidad')))) {
     $type = 'info';
     $msg = 'La unidad se ha añadido con éxito.';
 } else {

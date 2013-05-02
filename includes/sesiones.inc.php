@@ -2,7 +2,7 @@
 
 class sesiones {
 
-    public function login($user, $pass) {
+    public static function login($user, $pass) {
         $db = new base();
         $qry = "select id,
         usuario,
@@ -25,25 +25,25 @@ class sesiones {
         }
     }
 
-    public function set_userdata($arg) {
+    public static function set_userdata($arg) {
         $_SESSION['userdata'] = $arg;
     }
 
-    public function userdata($arg = '') {
+    public static function userdata($arg = '') {
         if ($arg == '') {
             return $_SESSION['userdata'];
         } else {
-            return $_SESSION['userdata']['arg'];
+            return $_SESSION['userdata'][$arg];
         }
     }
 
-    public function logged_in() {
+    public static function logged_in() {
         if (sesiones::userdata('status') != 'activo') {
             redirect(site_url() . '/sesiones');
         }
     }
 
-    public function logout() {
+    public static function logout() {
         session_destroy();
         redirect(site_url());
     }

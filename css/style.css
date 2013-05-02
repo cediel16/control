@@ -1,13 +1,12 @@
 root { 
     display: block;
 }
-
 html, body {
     background: url("../img/bg.jpg") repeat-x scroll 0 0 #EAEAEA;
     font-family: tahoma,sans,arial;
     font-size: 12px;
     margin: 0;
-    padding: 0;
+    /*padding: 0;*/
 }
 
 .contenedor-principal{
@@ -15,10 +14,9 @@ html, body {
     border: 1px solid #C7C7C7;
     border-radius: 4px 4px 4px 4px;
     box-shadow: 0 0 5px #BBBBBB;
-    margin: 10px;
     min-height: 300px;
-    padding:0px;
 }
+
 
 .contenido-principal{
     padding:10px;
@@ -26,23 +24,29 @@ html, body {
 
 .banner{
     background: #F1F1F1;
-    border-bottom: 1px solid #D7D7D7;
     color:#666666;
 }
 
 .banner ul{
-    height:45px;
+    height:30px;
     list-style:none;
     margin:0px;
-    padding:0px;
+    padding:0px 15px 0px 15px;
+
+
 }
 
 .banner li{
     float: left;
-    margin:10px;
-    padding:4px;
-    font-size:14px;
+    padding:0px;
+    font-size:12px;
     border:0px solid red;
+    line-height: 29px;
+}
+
+.banner li:last-child{
+    float:right;
+    line-height: 28px;
 }
 
 .banner .logo{
@@ -88,7 +92,5 @@ html, body {
 .text-center{
     text-align: center;
 }
-
-
 
 
