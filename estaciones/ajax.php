@@ -11,27 +11,33 @@ switch ($data['band']) {
             );
             break;
         }
+
+    case 'obtener_fila': {
+            $json = array(
+                'fila' => estaciones::obtener_fila($data['estacion_id'])
+            );
+            break;
+        }
     case 'add': {
-            if ($data['ruta'] == '') {
-                $json = array(
-                    'resp' => 2,
-                    'msj' => 'Escribe el nombre de la ruta que deseas añadir.'
-                );
-            } elseif (!rutas::esta_ruta_disponible($data['ruta'])) {
-                $json = array(
-                    'resp' => 2,
-                    'msj' => 'El nombre de la ruta <i>"' . $data['ruta'] . '"</i> ya se encuntra registrada.'
-                );
-            } elseif (rutas::add(array('ruta' => $data['ruta']))) {
+            $d = array(
+                'ruta_fkey' => $data['ruta'],
+                'unidad_fkey' => $data['unidad'],
+                'cargo_fkey' => $data['cargo'],
+                'usuario_fkey' => $data['usuario'],
+                'orden' => $data['orden'],
+                'horas' => $data['horas'],
+                'descripcion' => $data['descripcion']
+            );
+            if (estaciones::add($d)) {
                 $json = array(
                     'resp' => 1,
-                    'msj' => 'El nombre de la ruta se ha añadido con éxito.',
-                    'lista' => rutas::lista()
+                    'msj' => 'La estación se ha añadido con éxito.',
+                    'lista' => estaciones::lista_por_ruta($data['ruta'])
                 );
             } else {
                 $json = array(
                     'resp' => 0,
-                    'msj' => 'Error al intentar añadir el nombre de la ruta.'
+                    'msj' => 'Error al intentar añadir la estación.'
                 );
             }
             break;

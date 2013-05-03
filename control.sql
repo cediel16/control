@@ -53,7 +53,7 @@ ALTER SEQUENCE cargos_id_seq OWNED BY cargos.id;
 -- Name: cargos_id_seq; Type: SEQUENCE SET; Schema: public; Owner: johel
 --
 
-SELECT pg_catalog.setval('cargos_id_seq', 1, false);
+SELECT pg_catalog.setval('cargos_id_seq', 3, true);
 
 
 --
@@ -104,12 +104,13 @@ SELECT pg_catalog.setval('documentos_id_seq', 1, false);
 
 CREATE TABLE estaciones (
     id integer NOT NULL,
-    descripcion text NOT NULL,
     ruta_fkey integer NOT NULL,
     unidad_fkey integer NOT NULL,
     cargo_fkey integer NOT NULL,
+    usuario_fkey integer NOT NULL,
+    orden integer NOT NULL,
     horas integer NOT NULL,
-    orden integer NOT NULL
+    descripcion text NOT NULL
 );
 
 
@@ -140,7 +141,7 @@ ALTER SEQUENCE estaciones_id_seq OWNED BY estaciones.id;
 -- Name: estaciones_id_seq; Type: SEQUENCE SET; Schema: public; Owner: johel
 --
 
-SELECT pg_catalog.setval('estaciones_id_seq', 1, false);
+SELECT pg_catalog.setval('estaciones_id_seq', 8, true);
 
 
 --
@@ -181,7 +182,7 @@ ALTER SEQUENCE rutas_id_seq OWNED BY rutas.id;
 -- Name: rutas_id_seq; Type: SEQUENCE SET; Schema: public; Owner: johel
 --
 
-SELECT pg_catalog.setval('rutas_id_seq', 1, false);
+SELECT pg_catalog.setval('rutas_id_seq', 13, true);
 
 
 --
@@ -222,7 +223,7 @@ ALTER SEQUENCE unidades_id_seq OWNED BY unidades.id;
 -- Name: unidades_id_seq; Type: SEQUENCE SET; Schema: public; Owner: johel
 --
 
-SELECT pg_catalog.setval('unidades_id_seq', 33, true);
+SELECT pg_catalog.setval('unidades_id_seq', 89, true);
 
 
 --
@@ -316,6 +317,9 @@ ALTER TABLE ONLY usuarios ALTER COLUMN id SET DEFAULT nextval('usuarios_id_seq':
 --
 
 COPY cargos (id, cargo, status) FROM stdin;
+1	Asistente	activo
+2	Director	activo
+3	Jefe de unidad	activo
 \.
 
 
@@ -331,7 +335,13 @@ COPY documentos (id, titulo, descripcion, status) FROM stdin;
 -- Data for Name: estaciones; Type: TABLE DATA; Schema: public; Owner: johel
 --
 
-COPY estaciones (id, descripcion, ruta_fkey, unidad_fkey, cargo_fkey, horas, orden) FROM stdin;
+COPY estaciones (id, ruta_fkey, unidad_fkey, cargo_fkey, usuario_fkey, orden, horas, descripcion) FROM stdin;
+3	12	89	1	1	1	2	fsdfdfds
+4	12	84	2	1	22	223	342342
+5	12	85	1	1	1	2	gdfg sfhs hs
+6	12	85	1	1	111	222	asdasdasda
+7	12	83	2	1	1	3543453	gsdgfs
+8	12	85	1	1	1	1	aasdasdas dasd as dasd sdfadsg adg adg fadfg adfg adfga
 \.
 
 
@@ -340,6 +350,8 @@ COPY estaciones (id, descripcion, ruta_fkey, unidad_fkey, cargo_fkey, horas, ord
 --
 
 COPY rutas (id, ruta, status) FROM stdin;
+12	Control de Obras Públicas	activo
+13	12	activo
 \.
 
 
@@ -348,28 +360,13 @@ COPY rutas (id, ruta, status) FROM stdin;
 --
 
 COPY unidades (id, unidad, status) FROM stdin;
-1	Departamento de Informatica	activo
-2	sds	activo
-3	Cediel	activo
-5	sdsdasdad	activo
-8	eee	activo
-10	ffff	activo
-11	dsdsdsssssssssssss	activo
-12	zvxdvx	activo
-15	sadasda	activo
-17	Teresdasda asd asd	activo
-19	sassd	activo
-21	asdasd	activo
-22	fsdfsdf	activo
-23	xdvddddddddddddd	activo
-24	asda	activo
-25	asdasdadasd	activo
-26	ddsd	activo
-28	32423	activo
-29	1111	activo
-31	54354353	activo
-32	aaaaa	activo
-33	ioiuiohi oihigjhgvjhgjh	activo
+83	Dirección de Informática	activo
+84	Dirección de Gestión Interna	activo
+86	Dirección de Recursos Humanos	activo
+87	Dirección de Inquilinato	activo
+88	Jefatura de Compras y Suministros	activo
+89	Direccion de Hacienda Municipal	activo
+85	Dirección de Gestion Externa	activo
 \.
 
 
@@ -484,6 +481,14 @@ ALTER TABLE ONLY estaciones
 
 ALTER TABLE ONLY estaciones
     ADD CONSTRAINT estaciones_unidad_fkey_fkey FOREIGN KEY (unidad_fkey) REFERENCES unidades(id);
+
+
+--
+-- Name: estaciones_usuario_fkey_fkey; Type: FK CONSTRAINT; Schema: public; Owner: johel
+--
+
+ALTER TABLE ONLY estaciones
+    ADD CONSTRAINT estaciones_usuario_fkey_fkey FOREIGN KEY (usuario_fkey) REFERENCES usuarios(id);
 
 
 --

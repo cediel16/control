@@ -4,5 +4,5 @@
 
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo site_url() ?>/css/jquery-ui-theme/jquery-ui-1.10.0.custom.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo site_url() ?>/css/bootstrap.css" />
+<link rel="stylesheet" type="text/css" media="screen" href="<?php echo site_url() ?>/css/alert-bangtidy.css" />
 <link rel="stylesheet" type="text/css" media="screen" href="<?php echo site_url() ?>/css/style.css" />
-

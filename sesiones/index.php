@@ -2,7 +2,7 @@
 require_once '../config.php';
 if (count($_POST) > 0) {
     if (sesiones::login($_POST['username'], $_POST['password'])) {
-        redirect('..');
+        redirect();
     } else {
         $msg = 'Usuario o contraseña inválidos';
     }

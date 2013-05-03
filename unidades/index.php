@@ -1,5 +1,6 @@
 <?php
 require_once '../config.php';
+sesiones::logged_in();
 ?>
 <!DOCTYPE html>
 <html>

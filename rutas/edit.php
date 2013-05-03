@@ -1,20 +1,18 @@
 <?php
 require_once '../config.php';
-
+sesiones::logged_in();
 $data = rutas::obtener_fila(var_get('var'));
-
-
 ?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Control de documentos</title>
-        <?php include_once '../tpl/link.php'; ?>
+<?php include_once '../tpl/link.php'; ?>
     </head>
     <body>
         <header>
-            <?php include_once '../tpl/header.php'; ?>
+<?php include_once '../tpl/header.php'; ?>
         </header>
         <section class="container-fluid contenedor-principal">
             <div class="titlebar">
@@ -45,7 +43,7 @@ $data = rutas::obtener_fila(var_get('var'));
                 </form>
             </div>
         </section>
-        <?php include_once '../tpl/script.php'; ?>
+<?php include_once '../tpl/script.php'; ?>
         <script src="<?php echo site_url() ?>/js/unidades.js"></script>
     </body>
 </html>

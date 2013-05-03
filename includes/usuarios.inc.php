@@ -1,33 +1,33 @@
 <?php
 
-class cargos {
+class usuarios {
 
     public static function add($data) {
         $db = new base();
-        return $db->db_insert('cargos', $data) === 1;
+        return $db->db_insert('unidades', $data) === 1;
     }
 
     public static function edit($data) {
         $db = new base();
-        return $db->db_update('cargos', array('cargo' => $data['cargo']), "id='" . $data['id'] . "'") === 1;
+        return $db->db_update('unidades', array('unidad' => $data['unidad']), "id='" . $data['id'] . "'") === 1;
     }
 
     public static function lista() {
         $db = new base();
         $db->db_query("
             select *
-            from cargos 
-            order by cargo
+            from unidades 
+            order by unidad
         ");
         $r.='<table class="table table-bordered table-hover">';
         $r.='<thead>';
-        $r.='<tr><th>Cargos</th></tr>';
+        $r.='<tr><th>Unidades</th></tr>';
         $r.='</thead>';
         $r.='<tbody>';
         while (!$db->eof) {
             $r.='<tr>';
             $r.='<td>';
-            $r.='<a href="' . site_url() . '/cargos/edit.php?var=' . $db->fields['id'] . '">' . $db->fields['cargo'] . '</a>';
+            $r.='<a href="' . site_url() . '/unidades/edit.php?var=' . $db->fields['id'] . '">' . $db->fields['unidad'] . '</a>';
             $r.='</td>';
             $r.='</tr>';
             $db->db_move_next();
@@ -43,22 +43,22 @@ class cargos {
         return $r;
     }
 
-    public static function esta_cargo_disponible($arg) {
+    public static function esta_unidad_disponible($arg) {
         $db = new base();
         $db->db_query("
     select 1
-    from cargos 
-    where cargo='$arg'
+    from unidades 
+    where unidad='$arg'
     ");
         return count($db->data) == 0;
     }
 
-    public static function esta_cargo_disponible_al_editar($id, $cargo) {
+    public static function esta_unidad_disponible_al_editar($id, $unidad) {
         $db = new base();
         $db->db_query("
     select 1
-    from cargos 
-    where cargo='$cargo'
+    from unidades 
+    where unidad='$unidad'
     and id<>$id
     ");
         return count($db->data) == 0;
@@ -67,10 +67,10 @@ class cargos {
     public static function obtener_fila($id) {
         $db = new base();
         $db->db_query("
-            select *
-            from cargos 
-            where id=$id
-        ");
+    select *
+    from unidades 
+    where id=$id
+    ");
         return $db->data[0];
     }
 
@@ -78,8 +78,8 @@ class cargos {
         $db = new base();
         $db->db_query("
             select *
-            from cargos 
-            order by cargo
+            from usuarios 
+            order by nombre
         ");
         return $db->data;
     }

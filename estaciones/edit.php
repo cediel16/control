@@ -1,6 +1,6 @@
 <?php
 require_once '../config.php';
-
+sesiones::logged_in();
 $data = rutas::obtener_fila(var_get('var'));
 
 

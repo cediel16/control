@@ -124,3 +124,21 @@ html, body {
     text-align: center;
     padding-top:50px;
 }
+
+#form_estaciones{
+    padding:0px;
+    margin:0px;
+}
+
+.notifications {
+    position: fixed;
+}
+
+.notifications.top-center {
+    left: 0;
+    top: 0;
+    width: 96%;
+    margin-top:20px;
+    margin-left:2%;
+    margin-right:2%;
+}

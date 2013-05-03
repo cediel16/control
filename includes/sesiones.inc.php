@@ -39,13 +39,13 @@ class sesiones {
 
     public static function logged_in() {
         if (sesiones::userdata('status') != 'activo') {
-            redirect(site_url() . '/sesiones');
+            redirect('sesiones');
         }
     }
 
     public static function logout() {
         session_destroy();
-        redirect(site_url());
+        redirect();
     }
 
 }
