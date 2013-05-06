@@ -37,15 +37,44 @@ class sesiones {
         }
     }
 
+    public static function logout() {
+        session_destroy();
+        redirect();
+    }
+
     public static function logged_in() {
-        if (sesiones::userdata('status') != 'activo') {
+        if (!sesiones::is_logged_in()) {
             redirect('sesiones');
         }
     }
 
-    public static function logout() {
-        session_destroy();
-        redirect();
+    public static function is_logged_in() {
+        return sesiones::userdata('status') === 'activo';
+    }
+
+    public static function is_has_permission($p) {
+        $db = new base();
+        $qry = "
+          select 1
+          from usuarios a
+          inner join roles b on b.id=a.rol_fkey
+          inner join roles_permisos c on c.rol_fkey=b.id
+          inner join permisos d on d.id=c.permiso_fkey
+          and lower(permiso)='$p'
+          and a.id=" . sesiones::userdata('id');
+        if (!$db->db_query($qry)) {
+            return FALSE;
+        } elseif ($db->db_num_rows() == 1) {
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+
+    public static function has_permission($p) {
+        if (!sesiones::is_has_permission($p)) {
+            redirect();
+        }
     }
 
 }

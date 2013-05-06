@@ -7,6 +7,8 @@ if (count($_POST) > 0) {
         $msg = 'Usuario o contraseña inválidos';
     }
 }
+
+
 ?>
 <!DOCTYPE html>
 <html>

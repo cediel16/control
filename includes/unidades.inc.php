@@ -27,7 +27,11 @@ class unidades {
         while (!$db->eof) {
             $r.='<tr>';
             $r.='<td>';
-            $r.='<a href="' . site_url() . '/unidades/edit.php?var=' . $db->fields['id'] . '">' . $db->fields['unidad'] . '</a>';
+            if (sesiones::is_has_permission('unidades.editar')) {
+                $r.='<a href="' . site_url() . '/unidades/edit.php?var=' . $db->fields['id'] . '">' . $db->fields['unidad'] . '</a>';
+            } else {
+                $r.=$db->fields['unidad'];
+            }
             $r.='</td>';
             $r.='</tr>';
             $db->db_move_next();

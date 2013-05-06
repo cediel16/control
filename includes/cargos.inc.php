@@ -27,7 +27,11 @@ class cargos {
         while (!$db->eof) {
             $r.='<tr>';
             $r.='<td>';
-            $r.='<a href="' . site_url() . '/cargos/edit.php?var=' . $db->fields['id'] . '">' . $db->fields['cargo'] . '</a>';
+            if (sesiones::is_has_permission('cargos.editar')) {
+                $r.='<a href="' . site_url() . '/cargos/edit.php?var=' . $db->fields['id'] . '">' . $db->fields['cargo'] . '</a>';
+            } else {
+                $r.=$db->fields['cargo'];
+            }
             $r.='</td>';
             $r.='</tr>';
             $db->db_move_next();
@@ -85,5 +89,4 @@ class cargos {
     }
 
 }
-
 ?>

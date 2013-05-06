@@ -1,7 +1,7 @@
 <?php
 require_once '../config.php';
 sesiones::logged_in();
-
+sesiones::has_permission('cargos.editar');
 $data = cargos::obtener_fila(var_get('var'));
 ?>
 <!DOCTYPE html>

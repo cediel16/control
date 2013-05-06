@@ -7,9 +7,14 @@ class estaciones {
         return $db->db_insert('estaciones', $data) === 1;
     }
 
-    public static function edit($data) {
+    public static function edit($estacion_id, $data) {
         $db = new base();
-        return $db->db_update('rutas', array('ruta' => $data['ruta']), "id='" . $data['id'] . "'") === 1;
+        return $db->db_update('estaciones', $data, "id=" . $estacion_id) === 1;
+    }
+
+    public static function del($estacion_id) {
+        $db = new base();
+        return $db->db_delete('estaciones', "id=" . $estacion_id) === 1;
     }
 
     public static function lista_por_ruta($ruta) {
@@ -69,7 +74,7 @@ class estaciones {
                 <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle">Acciones <span class="caret"></span></button>
                 <ul class="dropdown-menu">
                   <li><a href="javascript:void(0);" onclick="javascript:edit(' . $db->fields['estacion_id'] . ');">Editar</a></li>
-                  <li><a href="#">Eliminar</a></li>
+                  <li><a href="javascript:void(0);" onclick="javascript:del(' . $db->fields['estacion_id'] . ');">Eliminar</a></li>
                 </ul>
               </div>';
             $r.='</td>';

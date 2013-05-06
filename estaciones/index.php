@@ -33,7 +33,6 @@ $usuarios = usuarios::obtener_filas();
                                             <option value="<?php echo $rutas[$i]['id'] ?>"><?php echo $rutas[$i]['ruta'] ?></option>
                                         <?php } ?>
                                     </select>
-                                    <input type="text" id="ruta_id" name="ruta_id" />
                                 </div>
                             </div>
                         </form>
@@ -50,6 +49,7 @@ $usuarios = usuarios::obtener_filas();
                                 <div class="control-group">
                                     <label class="control-label"><strong>Orden</strong></label>
                                     <div class="controls">
+                                        <input type="hidden" id="estacion_id" name="estacion_id" />
                                         <input class="span12" type="text" id="orden" name="orden" />
                                     </div>
                                 </div>
@@ -120,8 +120,8 @@ $usuarios = usuarios::obtener_filas();
                                     <div class="btn-group">
                                         <button data-toggle="dropdown" class="btn dropdown-toggle span12">Acción <span class="caret"></span></button>
                                         <ul class="dropdown-menu pull-right">
-                                            <li><a id="anch_edit">Editar</a></li>
-                                            <li><a id="anch_cancel">Cancelar</a></li>
+                                            <li><a href="javascript:void(0);" id="anch_save">Guardar</a></li>
+                                            <li><a href="javascript:void(0);" id="anch_cancel">Cancelar</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -131,6 +131,9 @@ $usuarios = usuarios::obtener_filas();
                 </div>
                 <div id="lista" class="tabbable basic-grid">
                 </div>
+            </div>
+            <div id="dialog-confirm" title="Eliminar estación">
+                <h5>¿Estás seguro que deseas eliminar esta estación?</h5>
             </div>
         </section>
         <?php include_once '../tpl/script.php'; ?>

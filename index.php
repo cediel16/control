@@ -2,6 +2,8 @@
 require_once 'config.php';
 
 sesiones::logged_in();
+
+sesiones::is_has_permission('unidades.anadir');
 ?>
 <!DOCTYPE html>
 <html>

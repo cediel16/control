@@ -1,6 +1,7 @@
 <?php
 require_once '../config.php';
 sesiones::logged_in();
+//sesiones::has_permission('rutas.acceso');
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +26,11 @@ sesiones::logged_in();
             </div>
             <div class="contenido-principal">
                 <div id="flashdata"></div>
-                <form id="form_add" action="ajax.php" class="form-inline" method="post">
-                    <input type="text" class="span4" placeholder="Añadir ruta de documento" name="ruta" id="ruta">
-                </form>
+                <?php if (sesiones::is_has_permission('rutas.insertar')) { ?>
+                    <form id="form_add" action="ajax.php" class="form-inline" method="post">
+                        <input type="text" class="span4" placeholder="Añadir ruta de documento" name="ruta" id="ruta">
+                    </form>
+                <?php } ?>
                 <div id="lista" class="tabbable basic-grid">
                     <?php echo rutas::lista() ?>
                 </div>
