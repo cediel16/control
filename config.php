@@ -9,4 +9,5 @@ require_once 'includes/unidades.inc.php';
 require_once 'includes/cargos.inc.php';
 require_once 'includes/rutas.inc.php';
 require_once 'includes/estaciones.inc.php';
+require_once 'includes/roles.inc.php';
 ?>

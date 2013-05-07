@@ -1,16 +1,10 @@
 <?php
 
-class usuarios {
+class roles {
 
     public static function add($data) {
         $db = new base();
-        $data['usuario'] = $data['email'];
-        $data['clave'] = $data['clave1'];
-        $data['rol_fkey'] = $data['rol'];
-        unset($data['clave1']);
-        unset($data['clave2']);
-        unset($data['rol']);
-        return $db->db_insert('usuarios', $data) === 1;
+        return $db->db_insert('unidades', $data) === 1;
     }
 
     public static function edit($data) {
@@ -55,7 +49,7 @@ class usuarios {
             $r.='<div class="btn-group pull-right">
                 <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle">Acciones <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li><a href="'.  site_url().'/usuarios/edit.php?var='.$db->fields['usuario_id'].'">Editar</a></li>
+                  <li><a href="javascript:void(0);" onclick="javascript:edit(' . $db->fields['estacion_id'] . ');">Editar</a></li>
                   <li><a href="javascript:void(0);" onclick="javascript:del(' . $db->fields['estacion_id'] . ');">Eliminar</a></li>
                 </ul>
               </div>';
@@ -113,7 +107,7 @@ class usuarios {
         $db = new base();
         $db->db_query("
     select *
-    from usuarios
+    from unidades 
     where id=$id
     ");
         return $db->data[0];
@@ -123,8 +117,8 @@ class usuarios {
         $db = new base();
         $db->db_query("
             select *
-            from usuarios 
-            order by nombre
+            from roles 
+            order by rol
         ");
         return $db->data;
     }

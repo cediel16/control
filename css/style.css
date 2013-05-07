@@ -93,6 +93,10 @@ html, body {
     text-align: center;
 }
 
+.header-login-phone{
+    display: none;
+}
+
 @media screen and (max-width:797px) {
 
     body{
@@ -105,6 +109,13 @@ html, body {
 
     .banner{
         background:#F1F1F1;
+    }
+
+    .header-login{
+        display: none;
+    }
+    .header-login-phone{
+        display: block;
     }
 }
 

@@ -19,7 +19,6 @@
                         </ul>
                     </li>
                     <?php if (sesiones::is_has_permission('unidades.acceso') || sesiones::is_has_permission('cargos.acceso') || sesiones::is_has_permission('rutas.acceso') || sesiones::is_has_permission('estaciones.acceso')) { ?>
-
                         <li class="dropdown">
                             <a data-toggle="dropdown" class="dropdown-toggle" href="#">Definiciones <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -36,6 +35,24 @@
                                     <li><a href="<?php echo site_url() ?>/estaciones">Estaciones</a></li>
                                 <?php } ?>
                             </ul>
+                        </li>
+                    <?php } ?>
+                </ul>
+                <ul class="nav pull-right">
+                    <?php if (sesiones::is_has_permission('usuarios.acceso') || sesiones::is_has_permission('roles.acceso') || sesiones::is_has_permission('permisos.acceso')) { ?>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">Administración de acceso<b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <?php if (sesiones::is_has_permission('usuarios.acceso')) { ?>
+                                    <li><a href="<?php echo site_url() ?>/usuarios">Usuarios</a></li>
+                                <?php } ?>
+                                <?php if (sesiones::is_has_permission('roles.acceso')) { ?>
+                                    <li><a href="<?php echo site_url() ?>/roles">Roles</a></li>
+                                <?php } ?>
+                                <?php if (sesiones::is_has_permission('permisos.acceso')) { ?>
+                                    <li><a href="<?php echo site_url() ?>/permisos">Permisos</a></li>
+                                <?php } ?>
+                                </ul>
                         </li>
                     <?php } ?>
                 </ul>

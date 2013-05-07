@@ -7,8 +7,6 @@ if (count($_POST) > 0) {
         $msg = 'Usuario o contraseña inválidos';
     }
 }
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,63 +23,42 @@ if (count($_POST) > 0) {
         <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css" />
     </head>
     <body>
-        <div class="content-fluid">
-            <div class="span4 offset4 well">
-                <legend>Inicio de sesión</legend>
-                <form method="POST" action="." accept-charset="UTF-8">
-                    <div class="control-group">
-                        <!-- Username -->
-                        <div class="controls">
-                            <input type="text" id="username" name="username" placeholder="Usuario" class="span4">
-                        </div>
+        <div class="content-fluid contenido-principal">
+            <div class="row-fluid">
+                <div class="span6 offset1 well">
+                    <div class="header-login">
+                        <legend>Control de documentos</legend>
+                        <p>Aqui va una descripción breve de la usabilidad del sistema.</p>
                     </div>
-                    <div class="control-group">
-                        <!-- Password-->
-                        <div class="controls">
-                            <input type="password" id="password" name="password" placeholder="Contraseña" class="span4">
+                    <h4 class="header-login-phone">Control de documentos</h4>
+                </div>
+                <div class="span4 well">
+                    <legend>Inicio de sesión</legend>
+                    <form method="POST" action="." accept-charset="UTF-8">
+                        <div class="control-group">
+                            <!-- Username -->
+                            <div class="controls">
+                                <input class="span12" type="text" id="username" name="username" placeholder="Usuario" class="span4">
+                            </div>
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <!-- Button -->
-                        <div class="controls">
-                            <button class="btn">Entrar</button>
+                        <div class="control-group">
+                            <!-- Password-->
+                            <div class="controls">
+                                <input class="span12" type="password" id="password" name="password" placeholder="Contraseña" class="span4">
+                            </div>
                         </div>
-                    </div>
-                </form>
-                <?php if (strlen($msg) > 1) { ?>
-                    <p class="error"><?php echo $msg ?></p>
-                <?php } ?>
-            </div>
-        </div>
-        <!--
-        <div id="page">
-            <div id="content">
-                <div id="inner">
-                    <table cellspacing="0" cellpadding="0" border="0">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <div style="width:675px; height:500px; background:#FFFFFF url('../img/maduro_al_volante.png') no-repeat center;">
-                                    </div>
-                                </td>
-                                <td style="vertical-align: top;">
-                                    <form id="form" action="login.php" method="post">
-                                        <h1>Sala Situacional Carabobo</h1>
-                                        <fieldset>
-                                            <label for="user">Nombre de usuario</label>
-                                            <input type="text" id="user" name="user" class="text" />
-                                            <label for="pass">Contrase&ntilde;a</label>
-                                            <input type="password" id="pass" name="pass" class="text" />
-                                            <input type="submit" value="Entrar" class="button" />
-                                        </fieldset>
-                                    </form>
-                                </td>
-                        </tbody>
-                    </table>	
+                        <div class="control-group">
+                            <!-- Button -->
+                            <div class="controls">
+                                <button class="btn">Entrar</button>
+                            </div>
+                        </div>
+                    </form>
+                    <?php if (strlen($msg) > 1) { ?>
+                        <p class="error"><?php echo $msg ?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>
-    </div>
-        -->
     </body>
 </html>

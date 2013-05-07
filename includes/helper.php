@@ -52,4 +52,37 @@ function flashdata() {
     return $r;
 }
 
+function status($status) {
+    switch ($status) {
+        case 'activo': {
+                $label_tag = 'label-info';
+                break;
+            }
+    }
+    return '<span class="label ' . $label_tag . '">' . ucwords($status) . '</span>';
+}
+
+function text($op, $text) {
+    switch ($op) {
+        case 'warning':
+        case 'error':
+        case 'info':
+        case 'success': {
+                $op = 'text-' . $op;
+                break;
+            }
+    }
+    return '<span class="' . $op . '">' . $text . '</span>';
+}
+
+function es_cedula($ci) {
+    $patron = '/^[0-9]{7,8}?$/';
+    return preg_match($patron, $ci);
+}
+
+function es_email($email) {
+    $patron = '/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/';
+    return preg_match($patron, $email);
+}
+
 ?>
