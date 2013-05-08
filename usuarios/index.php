@@ -30,8 +30,27 @@ sesiones::has_permission('usuarios.acceso');
             </div>
             <div class="contenido-principal">
                 <?php echo flashdata() ?>
+                <div class='notifications top-center'></div>
+                <div class="row-fluid">
+                    <div class="span3 pull-right">
+                        <div class="pull-right">
+                            <div class="btn-group pull-right">
+                                <button class="btn btn-mini dropdown-toggle" data-toggle="dropdown">Filtrar por: <span class="caret"></span></button>
+                                <ul class="dropdown-menu">
+                                    <li class="nav-header">Status</li>
+                                    <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="activos"><?php echo status('info', 'Activos') ?></a></li>
+                                    <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="inactivos"><?php echo status('important', 'Inactivos') ?></a></li>
+                                    <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="bloqueados"><?php echo status('warning', 'Bloqueados') ?></a></li>
+                                    <li class="divider"></li>
+                                    <li class="nav-header">Roles</li>
+                                    <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="1">Administrador</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div id="lista" class="tabbable basic-grid">
-                    <?php echo usuarios::lista() ?>
+                    <?php echo usuarios::lista(var_get('filtro')) ?>
                 </div>
             </div>
         </section>

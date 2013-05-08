@@ -52,10 +52,18 @@ function flashdata() {
     return $r;
 }
 
-function status($status) {
-    switch ($status) {
-        case 'activo': {
-                $label_tag = 'label-info';
+function status($type, $status) {
+    switch ($type) {
+        case 'success':
+        case 'important':
+        case 'warning':
+        case 'info':
+        case 'inverse': {
+                $label_tag = 'label-' . $type;
+                break;
+            }
+        default: {
+                $label_tag = '';
                 break;
             }
     }

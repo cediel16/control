@@ -108,7 +108,6 @@ if (count(var_post()) > 0) {
                         <label class="control-label">Confirmar contraseña</label>
                         <div class="controls">
                             <input class="span6" type="password" id="clave2" name="clave2" />
-                            <?php echo $msj_clave2 ?>
                         </div>
                     </div>
                     <div class="control-group">

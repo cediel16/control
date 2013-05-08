@@ -5,53 +5,42 @@ include_once '../config.php';
 $data = var_post();
 
 switch ($data['band']) {
-    case 'add': {
-            if ($data['unidad'] == '') {
-                $json = array(
-                    'resp' => 2,
-                    'msj' => 'Escribe la unidad que deseas añadir.'
-                );
-            } elseif (!unidades::esta_unidad_disponible($data['unidad'])) {
-                $json = array(
-                    'resp' => 2,
-                    'msj' => 'La unidad <i>"' . $data['unidad'] . '"</i> ya se encuntra registrada.'
-                );
-            } elseif (unidades::add(array('unidad' => $data['unidad']))) {
+    case 'cambiar_status': {
+            switch ($data['status']) {
+                case 'activo': {
+                        $msj_status_ok = 'activado';
+                        $msj_status_error = 'activar';
+                        break;
+                    }
+                case 'inactivo': {
+                        $msj_status_ok = 'desactivado';
+                        $msj_status_error = 'desactivar';
+                        break;
+                    }
+                case 'bloqueado': {
+                        $msj_status_ok = 'bloqueado';
+                        $msj_status_error = 'bloquear';
+                        break;
+                    }
+            }
+            if (usuarios::cambiar_status($data['usuario_id'], $data['status'])) {
                 $json = array(
                     'resp' => 1,
-                    'msj' => 'La unidad se ha añadido con éxito.',
-                    'lista' => unidades::lista()
+                    'msj' => "El usuario ha sido $msj_status_ok.",
+                    'lista' => usuarios::lista()
                 );
             } else {
                 $json = array(
                     'resp' => 0,
-                    'msj' => 'Error al intentar añadir la unidad.'
+                    'msj' => "Error al intentar $msj_status_error el usuario."
                 );
             }
             break;
         }
-    case 'edit': {
-            if ($data['unidad'] == '') {
-                $json = array(
-                    'resp' => 2,
-                    'msj' => 'Escribe la unidad que deseas añadir.'
-                );
-            } elseif (!unidades::esta_unidad_disponible_al_editar($data['id'], $data['unidad'])) {
-                $json = array(
-                    'resp' => 2,
-                    'msj' => 'La unidad <i>"' . $data['unidad'] . '"</i> ya se encuntra registrada.'
-                );
-            } elseif (unidades::edit($data)) {
-                $json = array(
-                    'resp' => 1,
-                    'msj' => 'La unidad se ha editado con éxito.'
-                );
-            } else {
-                $json = array(
-                    'resp' => 0,
-                    'msj' => 'Error al intentar editar la unidad.'
-                );
-            }
+    case 'filtrar': {
+            $json = array(
+                'lista' => usuarios::lista($data['filtro'])
+            );
             break;
         }
 }

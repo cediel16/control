@@ -3,30 +3,13 @@ require_once '../config.php';
 sesiones::logged_in();
 sesiones::has_permission('usuarios.editar');
 $usuario = usuarios::obtener_fila(var_get('var'));
+if (!is_array($usuario)) {
+    redirect('usuarios');
+}
 $roles = roles::obtener_filas();
 
 $band = 1;
 if (count(var_post()) > 0) {
-    if (!es_cedula(var_post('cedula'))) {
-        $msj_cedula = text('error', 'La cédula es inválida.');
-        $band = 0;
-    } elseif (!usuarios::esta_cedula_disponible(var_post('cedula'))) {
-        $msj_cedula = text('error', 'La cédula no está disponible.');
-        $band = 0;
-    }
-
-    if (var_post('nombre') === '') {
-        $msj_nombre = text('error', 'Escriba el nombre del usuario.');
-        $band = 0;
-    }
-
-    if (!es_email(var_post('email'))) {
-        $msj_email = text('error', 'Correo electrónico inválido.');
-        $band = 0;
-    } elseif (!usuarios::esta_email_disponible(var_post('email'))) {
-        $msj_email = text('error', 'El correo electrónico no está disponible.');
-        $band = 0;
-    }
 
     if (var_post('clave1') == '' || var_post('clave2') == '') {
         $msj_clave1 = text('error', 'Ingrese una contraseña y su confirmación.');
@@ -36,17 +19,13 @@ if (count(var_post()) > 0) {
         $band = 0;
     }
 
-    if (!is_numeric(var_post('rol'))) {
-        $msj_rol = text('error', 'Seleccione rol.');
-        $band = 0;
-    }
 
     if ($band) {
-        if (usuarios::add(var_post())) {
-            set_flashdata('info', 'Se ha añadido un nuevo usuario con éxito.');
+        if (usuarios::cambiar_clave(var_post('id'),var_post('clave1'))) {
+            set_flashdata('info', 'Los datos del usuario se han editado con éxito.');
             redirect('usuarios');
         } else {
-            set_flashdata('error', 'Error al intentar añadir un nuevo usuario.');
+            set_flashdata('error', 'Error al intentar editar los datos del usuario.');
         }
     }
 }
@@ -75,42 +54,37 @@ if (count(var_post()) > 0) {
             </div>
             <div class="contenido-principal">
                 <?php echo flashdata() ?>
-                <form action="<?php echo $_SERVER['PHP_SELF'] ?>" method="post" class="form-horizontal row-fluid" >
+                <form action="<?php echo $_SERVER['PHP_SELF'] ?>?var=<?php echo $usuario['id'] ?>" method="post" class="form-horizontal row-fluid" >
                     <div class="control-group">
                         <label class="control-label">Cédula</label>
                         <div class="controls">
                             <input class="span6" type="hidden" id="id" name="id" value="<?php echo $usuario['id'] ?>" />
                             <input class="span6" type="text" id="cedula" name="cedula" maxlength="8" value="<?php echo $usuario['cedula'] ?>" readonly />
-                            <?php echo $msj_cedula ?>
-<!--                            <p class="text-error">Donec ullamcorper nulla non metus auctor fringilla.</p>-->
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Nombre</label>
                         <div class="controls">
                             <input class="span6 " type="text" id="nombre" name="nombre" value="<?php echo $usuario['nombre'] ?>" readonly />
-                            <?php echo $msj_nombre ?>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Correo electrónico</label>
                         <div class="controls">
                             <input class="span6" type="text" id="email" name="email" value="<?php echo $usuario['email'] ?>" readonly />
-                            <?php echo $msj_email ?>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Contraseña</label>
                         <div class="controls">
-                            <input class="span6" type="text" id="clave1" name="clave1" />
-                            <?php echo $msj_email ?>
+                            <input class="span6" type="password" id="clave1" name="clave1" />
+                            <?php echo $msj_clave1 ?>
                         </div>
                     </div>
                     <div class="control-group">
                         <label class="control-label">Confirmar contraseña</label>
                         <div class="controls">
-                            <input class="span6" type="text" id="clave2" name="clave2" />
-                            <?php echo $msj_email ?>
+                            <input class="span6" type="password" id="clave2" name="clave2" />
                         </div>
                     </div>
                     <div class="control-group">

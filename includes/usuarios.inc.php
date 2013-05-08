@@ -15,17 +15,36 @@ class usuarios {
 
     public static function edit($data) {
         $db = new base();
-        return $db->db_update('unidades', array('unidad' => $data['unidad']), "id='" . $data['id'] . "'") === 1;
+        $id = $data['id'];
+        $data['rol_fkey'] = $data['rol'];
+        unset($data['id']);
+        unset($data['rol']);
+        return $db->db_update('usuarios', $data, "id=" . $id) === 1;
     }
 
-    public static function lista() {
+    public static function cambiar_status($usuario_id, $status) {
         $db = new base();
-        $db->db_query("
-            select a.id as usuario_id,a.nombre,b.rol,b.status
+        return $db->db_update('usuarios', array('status' => $status), "id=" . $usuario_id) === 1;
+    }
+
+    public static function cambiar_clave($usuario_id, $clave) {
+        $db = new base();
+        return $db->db_update('usuarios', array('clave' => md5($clave)), "id=" . $usuario_id) === 1;
+    }
+
+    public static function lista($filtro = '') {
+        if ($filtro == 'activos' || $filtro == 'inactivos' || $filtro == 'bloqueados') {
+            $where = str_replace(array('activos', 'inactivos', 'bloqueados'), array('activo', 'inactivo', 'bloqueado'), "and a.status='$filtro'");
+        } elseif (is_numeric($filtro)) {
+            $where = 'and b.id=' . $filtro;
+        }
+        $db = new base();
+        $qry = "select a.id as usuario_id,a.nombre,b.rol,a.status
             from usuarios a
             inner join roles b on b.id=a.rol_fkey
-            order by nombre
-        ");
+            $where
+            order by nombre";
+        $db->db_query($qry);
         $r.='<table class="table table-bordered table-hover">';
         $r.='<thead>';
         $r.='<tr>';
@@ -49,39 +68,58 @@ class usuarios {
             $r.=$db->fields['rol'];
             $r.='</td>';
             $r.='<td>';
-            $r.=status($db->fields['status']);
+            switch ($db->fields['status']) {
+                case 'activo':
+                    $r.=status('info', $db->fields['status']);
+                    break;
+                case 'bloqueado':
+                    $r.=status('warning', $db->fields['status']);
+                    break;
+                case 'inactivo':
+                    $r.=status('important', $db->fields['status']);
+                    break;
+            }
             $r.='</td>';
             $r.='<td>';
             $r.='<div class="btn-group pull-right">
                 <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle">Acciones <span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                  <li><a href="'.  site_url().'/usuarios/edit.php?var='.$db->fields['usuario_id'].'">Editar</a></li>
-                  <li><a href="javascript:void(0);" onclick="javascript:del(' . $db->fields['estacion_id'] . ');">Eliminar</a></li>
+                  <li><a href="' . site_url() . '/usuarios/edit.php?var=' . $db->fields['usuario_id'] . '">Editar</a></li>
+                  <li><a href="javascript:void(0);" onclick="activar(' . $db->fields['usuario_id'] . ')">Activar</a></li>
+                  <li><a href="javascript:void(0);" onclick="desactivar(' . $db->fields['usuario_id'] . ')">Desactivar</a></li>
+                  <li><a href="javascript:void(0);" onclick="bloquear(' . $db->fields['usuario_id'] . ')">Bloquear</a></li>
                 </ul>
               </div>';
             $r.='</td>';
             $r.='</tr>';
             $db->db_move_next();
         }
-        /*
-          <tr>
-          <td>
-          </td>
-          </tr>
-         */
         $r.='</tbody>';
         $r.='</table>';
         return $r;
     }
 
-    public static function esta_cedula_disponible($arg) {
-        if ($arg == '')
+    public static function esta_cedula_disponible($ci) {
+        if ($ci == '')
             return FALSE;
         $db = new base();
         $db->db_query("
     select 1
     from usuarios 
     where cedula='$arg'
+    ");
+        return count($db->data) == 0;
+    }
+
+    public static function esta_cedula_disponible_al_editar($id, $ci) {
+        if ($ci == '')
+            return FALSE;
+        $db = new base();
+        $db->db_query("
+    select 1
+    from usuarios 
+    where cedula='$ci'
+    and id<>$id
     ");
         return count($db->data) == 0;
     }
@@ -98,12 +136,14 @@ class usuarios {
         return count($db->data) == 0;
     }
 
-    public static function esta_unidad_disponible_al_editar($id, $unidad) {
+    public static function esta_email_disponible_al_editar($id, $email) {
+        if ($email == '')
+            return FALSE;
         $db = new base();
         $db->db_query("
     select 1
-    from unidades 
-    where unidad='$unidad'
+    from usuarios 
+    where email='$email'
     and id<>$id
     ");
         return count($db->data) == 0;
