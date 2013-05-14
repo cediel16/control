@@ -95,7 +95,6 @@ class base {
 
     function db_insert($tabla, $d) {
         $this->MSJ_ERROR_TYPE = 'i';
-
         if (!is_array($d)) {
             return 0;
         } elseif (!$this->db_query('select * from ' . $tabla . ' limit 1')) {
@@ -321,7 +320,10 @@ class base {
         }
     }
 
-    function db_affected_rows($rst) {
+    function db_affected_rows($rst = '') {
+        if ($rst == '') {
+            $rst = $this->rst;
+        }
         switch ($this->database) {
             case 'pgsql': {
                     $affected_rows = pg_affected_rows($rst);

@@ -4,6 +4,10 @@ sesiones::logged_in();
 sesiones::has_permission('rutas.editar');
 
 $data = rutas::obtener_fila(var_get('var'));
+
+if(!is_array($data)){
+    redirect('rutas');
+}
 ?>
 <!DOCTYPE html>
 <html>

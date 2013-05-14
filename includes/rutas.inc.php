@@ -101,10 +101,23 @@ where id=$id
     public static function obtener_filas() {
         $db = new base();
         $db->db_query("
-select *
-from rutas 
-order by ruta
-");
+            select *
+            from rutas 
+            order by ruta
+            
+        ");
+        return $db->data;
+    }
+
+    public static function obtener_filas_activas() {
+        $db = new base();
+        $db->db_query("
+            select *
+            from rutas 
+            where status='activo'
+            and bloqueado='si'
+            order by ruta
+        ");
         return $db->data;
     }
 

@@ -15,7 +15,7 @@ function redirect($url) {
 function var_post($arg = '') {
     $post = Array();
     foreach ($_POST as $k => $v) {
-        $post[$k] = trim($v, ' ');
+        $post[$k] = htmlspecialchars(trim($v, ' '));
     }
     if ($arg == '') {
         return $post;
@@ -27,7 +27,7 @@ function var_post($arg = '') {
 function var_get($arg = '') {
     $get = Array();
     foreach ($_GET as $k => $v) {
-        $get[$k] = trim($v, ' ');
+        $get[$k] = htmlspecialchars(trim($v, ' '));
     }
     if ($arg == '') {
         return $get;
@@ -67,7 +67,7 @@ function status($type, $status) {
                 break;
             }
     }
-    return '<span class="label ' . $label_tag . '">' . ucwords($status) . '</span>';
+    return '<span class="label ' . $label_tag . '">' . ucfirst($status) . '</span>';
 }
 
 function text($op, $text) {
@@ -91,6 +91,12 @@ function es_cedula($ci) {
 function es_email($email) {
     $patron = '/^[^0-9][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[@][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{2,4}$/';
     return preg_match($patron, $email);
+}
+
+function fecha($formato, $timestamp) {
+    $buscar = array("Jan", "Apr", "Aug", "Dec");
+    $reemplazar = array("Ene", "Abr", "Ago", "Dic");
+    return str_replace($buscar, $reemplazar, date($formato, $timestamp));
 }
 
 ?>

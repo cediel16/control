@@ -1,21 +1,19 @@
 <?php
 require_once '../config.php';
 sesiones::logged_in();
-sesiones::has_permission('cargos.editar');
-$data = cargos::obtener_fila(var_get('var'));
-if(!is_array($data)){
-    redirect('cargos');
-}?>
+sesiones::has_permission('unidades.editar');
+$data = unidades::obtener_fila(var_get('var'));
+?>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <title>Control de documentos</title>
-<?php include_once '../tpl/link.php'; ?>
+        <?php include_once '../tpl/link.php'; ?>
     </head>
     <body>
         <header>
-<?php include_once '../tpl/header.php'; ?>
+            <?php include_once '../tpl/header.php'; ?>
         </header>
         <section class="container-fluid contenedor-principal">
             <div class="titlebar">
@@ -31,7 +29,7 @@ if(!is_array($data)){
                     <div class="control-group">
                         <div class="controls">
                             <input type="hidden" id="id" name="id" value="<?php echo $data['id'] ?>">
-                            <input type="text" class="span5" id="cargo" name="cargo" value="<?php echo $data['cargo'] ?>" />
+                            <input type="text" class="span5" id="unidad" name="unidad" value="<?php echo $data['unidad'] ?>" />
                             <span class="cargando"><img src="../img/cargando.gif" /></span>
                         </div>
                     </div>
@@ -42,7 +40,7 @@ if(!is_array($data)){
                 </form>
             </div>
         </section>
-<?php include_once '../tpl/script.php'; ?>
+        <?php include_once '../tpl/script.php'; ?>
         <script src="<?php echo site_url() ?>/js/unidades.js"></script>
     </body>
 </html>

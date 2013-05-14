@@ -3,6 +3,9 @@ require_once '../config.php';
 sesiones::logged_in();
 sesiones::has_permission('unidades.editar');
 $data = unidades::obtener_fila(var_get('var'));
+if(!is_array($data)){
+    redirect('unidades');
+}
 ?>
 <!DOCTYPE html>
 <html>
