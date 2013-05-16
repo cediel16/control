@@ -65,8 +65,12 @@ $movimientos = documentos::obtener_vista_movimientos($doc['id']);
                                         <?php $testigo = 1; ?>
                                         <div class="row-fluid">
                                             <div class="span12">
-                                                <input class="span12 pull-left" type="text" placeholder="Respuesta" />
-                                                <button class="btn span2 pull-right" type="button">Responder</button>
+                                                <form action="ajax.php" method="post" id="form_respuesta">
+                                                    <input  type="hidden" id="movimiento_id" name="movimiento_id" value="<?php echo $movimientos[$i]['id'] ?>" />
+                                                    <input class="span12 pull-left" type="text" placeholder="Respuesta" id="respuesta" name="respuesta" />
+                                                    <div class="pull-left" id="msj_respuesta"></div>
+                                                    <input class="btn btn-info btn-small pull-right" type="submit" value="Responder" />
+                                                </form>
                                             </div>
                                         </div>
                                     <?php } ?>
@@ -86,6 +90,6 @@ $movimientos = documentos::obtener_vista_movimientos($doc['id']);
             </div>
         </section>
         <?php include_once '../tpl/script.php'; ?>
-        <script src="<?php echo site_url() ?>/js/unidades.js"></script>
+        <script src="<?php echo site_url() ?>/js/documentos.js"></script>
     </body>
 </html>

@@ -612,7 +612,7 @@ COPY estaciones (id, ruta_fkey, unidad_fkey, cargo_fkey, usuario_fkey, orden, ho
 47	13	87	3	10	6	2	212312313
 49	14	85	1	10	1	2	12121313
 48	14	85	1	11	2	1	121212
-50	14	84	1	3	233	60	e4rwgfs hhs ghhgg h
+50	14	84	1	3	3	60	e4rwgfs hhs ghhgg h
 \.
 
 

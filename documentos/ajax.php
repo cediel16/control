@@ -54,6 +54,13 @@ switch ($data['band']) {
             }
             break;
         }
+    case 'add_resp': {
+                $json = array(
+                    'resp' => 1,
+                    'msj' => 'Error al intentar registrar la respuesta.'
+                );
+            break;
+        }
 }
 
 echo json_encode($json);
