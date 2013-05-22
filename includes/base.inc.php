@@ -47,6 +47,7 @@ class base {
         }
 
         $this->db_connect($this->database);
+        
     }
 
     function db_query($qry) {
@@ -131,7 +132,7 @@ class base {
         } else {
             foreach ($d as $k => $v) {
                 if (is_numeric($k)) {
-                    $campos_datos.=$this->db_fetch_name($this->rst, $k) . '=' . $this->db_dato($this->rst, $v, $this->db_field_num($this->rst, $k)) . ',';
+                    $campos_datos.=$this->db_field_name($this->rst, $k) . '=' . $this->db_dato($this->rst, $v, $this->db_field_num($this->rst, $k)) . ',';
                 } else {
                     $campos_datos.=$k . '=' . $this->db_dato($this->rst, $v, $this->db_field_num($this->rst, $k)) . ',';
                 }

@@ -117,12 +117,15 @@ if (count(var_post()) > 0) {
                                 <option></option>
                                 <?php
                                 for ($i = 0; $i < count($roles); $i++) {
-                                    if ($roles[$i]['id'] == var_post('rol')) {
-                                        $sltd = 'selected';
-                                    } else {
-                                        $sltd = '';
+                                    if ($roles[$i]['status'] == 'activo') {
+
+                                        if ($roles[$i]['id'] == var_post('rol')) {
+                                            $sltd = 'selected';
+                                        } else {
+                                            $sltd = '';
+                                        }
+                                        echo '<option value="' . $roles[$i]['id'] . '" ' . $sltd . '>' . $roles[$i]['rol'] . '</option>';
                                     }
-                                    echo '<option value="' . $roles[$i]['id'] . '" ' . $sltd . '>' . $roles[$i]['rol'] . '</option>';
                                 }
                                 ?>
                             </select>

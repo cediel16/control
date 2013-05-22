@@ -60,12 +60,20 @@ class roles {
             $r.='<div class="btn-group pull-right">';
             $r.='<button data-toggle="dropdown" class="btn btn-mini dropdown-toggle">Acciones <span class="caret"></span></button>';
             $r.='<ul class="dropdown-menu">';
-            $r.='<li><a href="' . site_url() . '/roles/edit.php?var=' . $db->fields['id'] . '">Editar</a></li>';
+            if (sesiones::is_has_permission('roles.permisos')) {
+                $r.='<li><a href="' . site_url() . '/roles/edit.php?var=' . $db->fields['id'] . '">Editar</a></li>';
+            }
             if ($db->fields['status'] == 'activo') {
-                $r.='<li><a href="' . site_url() . '/roles/permisos.php?var=' . $db->fields['id'] . '">Gestionar permisos</a></li>';
-                $r.='<li><a href="javascript:void(0);" onclick="javascript:del(' . $db->fields['id'] . ');">Eliminar</a></li>';
+                if (sesiones::is_has_permission('roles.permisos')) {
+                    $r.='<li><a href="' . site_url() . '/roles/permisos.php?var=' . $db->fields['id'] . '">Gestionar permisos</a></li>';
+                }
+                if (sesiones::is_has_permission('roles.eliminar')) {
+                    $r.='<li><a href="javascript:void(0);" onclick="javascript:del(' . $db->fields['id'] . ');">Eliminar</a></li>';
+                }
             } elseif ($db->fields['status'] == 'eliminado') {
-                $r.='<li><a href="javascript:void(0);" onclick="javascript:act(' . $db->fields['id'] . ');">Activar</a></li>';
+                if (sesiones::is_has_permission('roles.activar')) {
+                    $r.='<li><a href="javascript:void(0);" onclick="javascript:act(' . $db->fields['id'] . ');">Activar</a></li>';
+                }
             }
             $r.='</ul>';
             $r.='</div>';
@@ -228,4 +236,5 @@ class roles {
     }
 
 }
+
 ?>

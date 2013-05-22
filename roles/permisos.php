@@ -1,7 +1,7 @@
 <?php
 require_once '../config.php';
 sesiones::logged_in();
-//sesiones::has_permission('unidades.editar');
+sesiones::has_permission('roles.permisos');
 $data = roles::obtener_fila(var_get('var'));
 ?>
 <!DOCTYPE html>

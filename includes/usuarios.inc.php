@@ -81,15 +81,30 @@ class usuarios {
             }
             $r.='</td>';
             $r.='<td>';
-            $r.='<div class="btn-group pull-right">
-                <button data-toggle="dropdown" class="btn btn-mini dropdown-toggle">Acciones <span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                  <li><a href="' . site_url() . '/usuarios/edit.php?var=' . $db->fields['usuario_id'] . '">Editar</a></li>
-                  <li><a href="javascript:void(0);" onclick="activar(' . $db->fields['usuario_id'] . ')">Activar</a></li>
-                  <li><a href="javascript:void(0);" onclick="desactivar(' . $db->fields['usuario_id'] . ')">Desactivar</a></li>
-                  <li><a href="javascript:void(0);" onclick="bloquear(' . $db->fields['usuario_id'] . ')">Bloquear</a></li>
-                </ul>
-              </div>';
+            if (sesiones::is_has_permission('usuarios.editar') || sesiones::is_has_permission('usuarios.activar') || sesiones::is_has_permission('usuarios.desactivar')  || sesiones::is_has_permission('usuarios.bloquear')) {
+                $r.='<div class="btn-group pull-right">';
+                $r.='<button data-toggle="dropdown" class="btn btn-mini dropdown-toggle">Acciones <span class="caret"></span></button>';
+                $r.='<ul class="dropdown-menu">';
+                if (sesiones::is_has_permission('usuarios.editar')) {
+                    $r.='<li><a href="' . site_url() . '/usuarios/edit.php?var=' . $db->fields['usuario_id'] . '">Editar</a></li>';
+                }
+                if (sesiones::is_has_permission('usuarios.activar')) {
+                    $r.='<li><a href = "javascript:void(0);" onclick = "activar(' . $db->fields['usuario_id'] . ')">Activar</a></li>';
+                }
+                if (sesiones::is_has_permission('usuarios.desactivar')) {
+                    $r.='<li><a href = "javascript:void(0);" onclick = "desactivar(' . $db->fields['usuario_id'] . ')">Desactivar</a></li>';
+                }
+                if (sesiones::is_has_permission('usuarios.bloquear')) {
+                    $r.='<li><a href = "javascript:void(0);" onclick = "bloquear(' . $db->fields['usuario_id'] . ')">Bloquear</a></li>';
+                }
+                /*
+
+                  
+                 * 
+                 */
+                $r.='</ul>';
+                $r.='</div>';
+            }
             $r.='</td>';
             $r.='</tr>';
             $db->db_move_next();
@@ -152,20 +167,18 @@ class usuarios {
     public static function obtener_fila($id) {
         $db = new base();
         $db->db_query("
-    select *
-    from usuarios
-    where id=$id
-    ");
+        select a.*,
+        b.rol
+        from usuarios a
+        inner join roles b on b.id=a.rol_fkey    
+        where a.id=$id
+        ");
         return $db->data[0];
     }
 
-    public static function obtener_filas() {
+    public static function obtener_lista_roles_para_filtrar() {
         $db = new base();
-        $db->db_query("
-            select *
-            from usuarios 
-            order by nombre
-        ");
+        $db->db_query("select distinct(id),rol from roles where id in (select rol_fkey from usuarios)");
         return $db->data;
     }
 

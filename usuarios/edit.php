@@ -96,15 +96,16 @@ if (count(var_post()) > 0) {
                         <label class="control-label">Rol</label>
                         <div class="controls">
                             <select class="span6" id="rol" name="rol">
-                                <option></option>
                                 <?php
                                 for ($i = 0; $i < count($roles); $i++) {
-                                    if ($roles[$i]['id'] == $usuario['rol_fkey']) {
-                                        $sltd = 'selected';
-                                    } else {
-                                        $sltd = '';
+                                    if ($roles[$i]['status']=='activo') {
+                                        if ($roles[$i]['id'] == $usuario['rol_fkey']) {
+                                            $sltd = 'selected';
+                                        } else {
+                                            $sltd = '';
+                                        }
+                                        echo '<option value="' . $roles[$i]['id'] . '" ' . $sltd . '>' . $roles[$i]['rol'] . '</option>';
                                     }
-                                    echo '<option value="' . $roles[$i]['id'] . '" ' . $sltd . '>' . $roles[$i]['rol'] . '</option>';
                                 }
                                 ?>
                             </select>

@@ -1,9 +1,11 @@
 <?php
 require_once '../config.php';
-if (count($_POST) > 0) {
-    if (sesiones::login($_POST['username'], $_POST['password'])) {
+$post = var_post();
+if (count($post) > 0) {
+    if (sesiones::login($post['username'], $post['password'])) {
         redirect();
     } else {
+
         $msg = 'Usuario o contraseña inválidos';
     }
 }

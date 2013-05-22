@@ -2,6 +2,7 @@
 require_once '../config.php';
 sesiones::logged_in();
 sesiones::has_permission('usuarios.acceso');
+$roles = usuarios::obtener_lista_roles_para_filtrar();
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,7 +44,9 @@ sesiones::has_permission('usuarios.acceso');
                                     <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="bloqueados"><?php echo status('warning', 'Bloqueados') ?></a></li>
                                     <li class="divider"></li>
                                     <li class="nav-header">Roles</li>
-                                    <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="1">Administrador</a></li>
+                                    <?php for ($i = 0; $i < count($roles); $i++) { ?>
+                                        <li><a href="javascript:void(0);" class="filtrar_usuarios" rel="<?php echo $roles[$i]['id'] ?>"><?php echo $roles[$i]['rol'] ?></a></li>
+                                    <?php } ?>
                                 </ul>
                             </div>
                         </div>

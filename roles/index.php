@@ -1,7 +1,7 @@
 <?php
 require_once '../config.php';
 sesiones::logged_in();
-//sesiones::has_permission('roles.acceso');
+sesiones::has_permission('roles.acceso');
 ?>
 <!DOCTYPE html>
 <html>
@@ -26,11 +26,11 @@ sesiones::logged_in();
             </div>
             <div class="contenido-principal">
                 <div class='notifications top-center'></div>
-                <?php //if (sesiones::is_has_permission('unidades.insertar')) { ?>
-                <form id="form_add" action="ajax.php" class="form-inline" method="post">
-                    <input type="text" class="span4" placeholder="Añadir rol" name="rol" id="rol">
-                </form>
-                <?php //} ?>
+                <?php if (sesiones::is_has_permission('roles.insertar')) { ?>
+                    <form id="form_add" action="ajax.php" class="form-inline" method="post">
+                        <input type="text" class="span4" placeholder="Añadir rol" name="rol" id="rol">
+                    </form>
+                <?php } ?>
                 <div id="lista" class="tabbable basic-grid">
                     <?php echo roles::lista() ?>
                 </div>
