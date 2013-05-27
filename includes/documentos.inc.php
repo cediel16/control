@@ -85,7 +85,6 @@ class documentos {
         <table class = "table table-condensed table-hover">
             <thead>
                 <tr>
-                    <th class = "span2">Nombre</th>
                     <th class = "span2"></th>
                     <th class = "span9"></th>
                     <th class = "span3">Fecha</th>
@@ -109,7 +108,7 @@ class documentos {
 
         }
 
-        public static function lista() {
+        public static function lista($status) {
             $db = new base();
             $db->db_query("
             select
@@ -122,13 +121,14 @@ class documentos {
             (select count(1) from movimientos where documento_fkey=a.id) as a_ejecutar
             from documentos a
             inner join rutas b on b.id=a.ruta_fkey
+            and a.status='$status'
             order by timestamp desc
             ");
             $r.='<table class = "table table-condensed table-hover">';
             $r.='<thead>';
             $r.='<tr>';
-            $r.='<th class="span2">Responsable</th>';
-            $r.='<th class="span2"></th>';
+            $r.='<th class="span1"></th>';
+            $r.='<th class="span1"></th>';
             $r.='<th class="span8">Descripción</th>';
             $r.='<th class="span2">Fecha</th>';
             $r.='</tr>';
@@ -136,13 +136,18 @@ class documentos {
             $r.='<tbody>';
             while (!$db->eof) {
                 $r.='<tr>';
-                $r.='<td>Johel Cediel</td>';
                 switch ($db->fields['status']) {
                     case'en curso': {
-                            $r.='<td><span class="pull-right">' . status('info', $db->fields['ejecutado'] . ' de ' . $db->fields['a_ejecutar']) . ' ' . status('info', $db->fields['status']) . '</span></td>';
+                            $option='info';
+                            break;
+                        }
+                    case'finalizado': {
+                            $option='success';
                             break;
                         }
                 }
+                            $r.='<td><span class="pull-right">' . status($option, $db->fields['ejecutado'] . ' de ' . $db->fields['a_ejecutar']) . '</span></td>';
+                            $r.='<td>' . status($option, $db->fields['status']) . '</span></td>';
                 $r.='<td><a href="' . site_url() . '/documentos/view.php?var=' . $db->fields['documento_id'] . '">' . documentos::cod_doc($db->fields['documento_id']) . ' ' . $db->fields['titulo'] . ' - <span class="muted">' . $db->fields['descripcion'] . '</span></a></td>';
                 $r.='<td>' . documentos::fecha($db->fields['timestamp']) . '</td>';
                 $r.='</tr>';

@@ -30,13 +30,29 @@ sesiones::has_permission('documentos.acceso');
                     <div class="input-append pull-left">
                         <a class="btn" href="<?php echo site_url() ?>/documentos/add.php">Añadir documento</a>
                     </div>
+
                     <div class="input-append pull-right">
                         <input class="" id="appendedInputButton" type="text">
                         <button class="btn" type="button">Buscar</button>
                     </div>
                 </div>
-                <div id="lista" class="tabbable basic-grid">
-                    <?php echo documentos::lista() ?>
+                <div class="tabbable"> <!-- Only required for left/right tabs -->
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a href="#tab1" data-toggle="tab">En curso</a></li>
+                        <li><a href="#tab2" data-toggle="tab">Finalizado</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tab1">
+                            <div id="lista" class="tabbable basic-grid">
+                                <?php echo documentos::lista('en curso') ?>
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tab2">
+                            <div id="lista" class="tabbable basic-grid">
+                                <?php echo documentos::lista('finalizado') ?>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

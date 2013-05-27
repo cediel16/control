@@ -4,6 +4,7 @@ session_start();
 
 require_once 'includes/helper.php';
 require_once 'includes/configuraciones.inc.php';
+require_once 'includes/email.inc.php';
 
 require_once 'includes/base.inc.php';
 require_once 'includes/sesiones.inc.php';

@@ -46,7 +46,7 @@ $movimientos = documentos::obtener_vista_movimientos($doc['id']);
                             <span class="btn btn-mini"><i class="icon-calendar"></i> Inicio: <?php echo fecha('d M Y - h:i:s a', $doc['fecha_inicio']) ?></span>
                             <span class="btn btn-mini"><i class="icon-calendar"></i> Fin: <?php echo fecha('d M Y - h:i:s a', $doc['fecha_fin']) ?></span>
                             <span class="btn btn-mini"><i class="icon-comment"></i> <?php echo $doc['estaciones_cumplidas'] ?> de <?php echo $doc['total_estaciones'] ?></span>
-                            <span class="btn btn-info btn-mini"><i class="icon-resize-full icon-white"></i><strong>En curso</strong></span>
+                            <span class="btn btn-info btn-mini"><i class="icon-resize-full icon-white"></i> <strong>En curso</strong></span>
                         </div>
                     </div>
                 </div>
